@@ -2,6 +2,7 @@
 
 import React from "react";
 import {decrypt} from "@/service/encrypt";
+import {RevealSecret} from "@/components/reveal-secret";
 
 async function decryptMessage(key: string) {
   try {
@@ -19,13 +20,11 @@ async function KeyPage({params}: { params: { key: string } }) {
           className={'bg-white m-5 p-6 text-center'}
       >
         <h1
-            className={'text-bold'}
+            className={'text-bold text-center font-bold text-2xl'}
         >
           Someone want to confess to you about... 💖
         </h1>
-        <p>
-          &quot;{decrypted}&quot;
-        </p>
+        <RevealSecret secret={decrypted}/>
       </section>
   )
 }

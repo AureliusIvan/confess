@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import {buttonVariants} from "@/components/ui/button";
+import {FaGithub} from "react-icons/fa";
+
 
 export default function Navbar(): React.JSX.Element {
   return (
@@ -12,8 +14,12 @@ export default function Navbar(): React.JSX.Element {
         <Link
             target={'_blank'}
             href={'https://github.com/AureliusIvan/confess'}
-            className={buttonVariants({variant: 'default'})}>
-          see on github
+            className={buttonVariants({variant: 'default', className: "flex gap-1"})}>
+
+          <span>
+            See on
+          </span>
+          <FaGithub/>
         </Link>
       </nav>
   );

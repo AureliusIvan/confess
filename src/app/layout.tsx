@@ -8,9 +8,8 @@ import type {Metadata} from "next";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Image from "next/image";
-import Head from "next/head";
+import {paradose, poppins} from "@/app/fonts";
 
-const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
   title: "Confess",
@@ -27,18 +26,17 @@ export default function RootLayout(
   return (
       <>
         <html lang="en">
-        <body className={inter.className}>
+        <body className={poppins.className}>
         <Toaster/>
         <main className={'relative min-h-screen'}>
           <Navbar/>
           <Image
+              className={'absolute z-[-1] object-cover'}
               fetchPriority={'high'}
               priority={true}
-              className={'absolute z-[-1]'}
               src={'/Flowers-Pattern.avif'}
               alt={'background'}
               fill
-              objectFit={'cover'}
           />
           {children}
         </main>

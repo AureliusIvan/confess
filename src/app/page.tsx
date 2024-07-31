@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import {Button, buttonVariants} from "@/components/ui/button";
 import {Textarea} from "@/components/ui/textarea";
+import {toast} from "@/components/ui/use-toast";
 
 export default function Home() {
   /**
@@ -37,10 +38,15 @@ export default function Home() {
         }
       });
       const data = await response.json();
-      setHash(data.hashed);
+      const encoded = encodeURIComponent(data.hashed);
+      setHash(encoded);
       form.reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error:', error);
+      toast({
+        title: 'Error',
+        description: error.message,
+      })
     }
   };
 
@@ -72,10 +78,10 @@ export default function Home() {
 
           {/*  display hash */}
           {hash && (
-              <div className="mt-8 flex flex-col">
+              <div className="mt-8 flex flex-col max-w-full">
                 <h2 className="text-2xl font-bold">Result</h2>
                 <p
-                    className={`text-2xl font-bold text-blue-600`}
+                    className={`font-bold text-blue-600 text-wrap break-all`}
                 >
                   {process.env.NEXT_PUBLIC_SITE_URL + "/" + hash}
                 </p>
