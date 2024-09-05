@@ -15,7 +15,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.1.7",
-    "lucide-react": "^0.436.0",
+    "lucide-react": "^0.438.0",
     "next": "14.2.8",
     "react": "^18",
     "react-canvas-confetti": "^2.0.7",
