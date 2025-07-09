@@ -32,7 +32,7 @@ export default function RootLayout(
           <Navbar/>
           <main className="flex-1 relative">
             <Image
-                className="absolute inset-0 z-[-1] object-cover"
+                className="absolute inset-0 z-[-10] object-cover"
                 fetchPriority="high"
                 priority={true}
                 src="/Flowers-Pattern.avif"
