@@ -28,19 +28,23 @@ export default function RootLayout(
         <html lang="en">
         <body className={poppins.className}>
         <Toaster/>
-        <main className={'relative min-h-screen'}>
+        <div className="flex flex-col min-h-screen">
           <Navbar/>
-          <Image
-              className={'absolute z-[-1] object-cover'}
-              fetchPriority={'high'}
-              priority={true}
-              src={'/Flowers-Pattern.avif'}
-              alt={'background'}
-              fill
-          />
-          {children}
-        </main>
-        <Footer/>
+          <main className="flex-1 relative">
+            <Image
+                className="absolute inset-0 z-[-1] object-cover"
+                fetchPriority="high"
+                priority={true}
+                src="/Flowers-Pattern.avif"
+                alt="background"
+                fill
+            />
+            <div className="relative z-10">
+              {children}
+            </div>
+          </main>
+          <Footer/>
+        </div>
         </body>
         </html>
       </>
