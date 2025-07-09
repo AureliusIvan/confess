@@ -14,18 +14,25 @@ export default function Footer(): React.JSX.Element {
   };
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-gray-800 text-white">
-      <h1>
+    <footer className="relative overflow-hidden">
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
+      
+      {/* Glass overlay */}
+      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
+      
+      {/* Content */}
+      <div className="relative flex items-center justify-center p-6 text-white">
         <a
           ref={privacyLinkRef}
           href="/privacy-policy"
-          className="text-2xl font-bold"
+          className="text-lg font-medium text-white hover:text-pink-200 transition-colors duration-300"
           onMouseEnter={() => handleMouseEnter(privacyLinkRef.current)}
           onMouseLeave={() => handleMouseLeave(privacyLinkRef.current)}
         >
-          privacy policy
+          Privacy Policy
         </a>
-      </h1>
-    </nav>
+      </div>
+    </footer>
   );
 }

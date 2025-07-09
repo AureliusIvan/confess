@@ -93,58 +93,93 @@ export default function Home() {
   };
 
   return (
-      <main className="flex min-h-screen flex-col items-center justify-between p-6">
-        <form
-            ref={formRef}
-            className="flex flex-col items-center justify-center bg-white p-6 rounded-lg shadow-lg"
-            onSubmit={handleSubmit}
-        >
-          {/*  upload string secret */}
-          <div className="flex flex-col items-center justify-center gap-1">
-            <label htmlFor="secret" className="text-2xl font-bold">
-              Confess your secret 💖
-            </label>
-            <Textarea
-                ref={textareaRef}
-                name="secret"
-                id="secret"
-                placeholder={"Enter your secret"}
-            />
-          </div>
-
-          {/*  submit button */}
-          <Button
-              ref={buttonRef}
-              type="submit"
-              className="bg-red-200 text-black p-4 rounded-lg mt-8"
-              onMouseEnter={() => handleMouseEnter(buttonRef.current)}
-              onMouseLeave={() => handleMouseLeave(buttonRef.current)}
+      <div className="flex min-h-full flex-col items-center justify-center p-6 py-12">
+        <div className="w-full max-w-2xl">
+          <form
+              ref={formRef}
+              className="form-enhanced rounded-3xl p-8 shadow-2xl transform transition-all duration-300 hover:shadow-3xl"
+              onSubmit={handleSubmit}
           >
-            Generate
-          </Button>
+            {/* Header */}
+            <div className="text-center mb-8">
+              <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
+                Confess your secret 💖
+              </h1>
+              <p className="text-gray-600 text-lg">
+                Share your thoughts privately and securely
+              </p>
+            </div>
 
-          {/*  display hash */}
-          {hash && (
-              <div ref={resultContainerRef} className="result-container mt-8 flex flex-col max-w-full">
-                <h2 className="text-2xl font-bold">Result</h2>
-                <p
-                    className={`font-bold text-blue-600 text-wrap break-all`}
-                >
-                  {process.env.NEXT_PUBLIC_SITE_URL + "/" + hash}
-                </p>
-
-                <Link
-                  ref={previewLinkRef}
-                  href={`/${hash}`}
-                  className={buttonVariants({variant: "default"})}
-                  onMouseEnter={() => handleMouseEnter(previewLinkRef.current)}
-                  onMouseLeave={() => handleMouseLeave(previewLinkRef.current)}
-                >
-                  Preview
-                </Link>
+            {/* Form content */}
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <label htmlFor="secret" className="block text-sm font-semibold text-gray-700">
+                  Your Secret Message
+                </label>
+                <Textarea
+                    ref={textareaRef}
+                    name="secret"
+                    id="secret"
+                    placeholder="Enter your secret message here..."
+                    className="min-h-[120px] resize-none border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-300 bg-white/80 backdrop-blur-sm text-base"
+                    required
+                />
               </div>
-          )}
-        </form>
-      </main>
+
+              {/* Submit button */}
+              <button
+                  ref={buttonRef}
+                  type="submit"
+                  className="w-full btn-gradient rounded-xl py-4 px-8 text-lg font-semibold text-white transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-purple-200 hover:shadow-2xl"
+                  onMouseEnter={() => handleMouseEnter(buttonRef.current)}
+                  onMouseLeave={() => handleMouseLeave(buttonRef.current)}
+              >
+                Generate Secret Link ✨
+              </button>
+            </div>
+
+            {/* Result section */}
+            {hash && (
+                <div ref={resultContainerRef} className="mt-8 p-6 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 rounded-2xl border-2 border-green-200 shadow-lg">
+                  <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-green-800 text-center">
+                      🎉 Success! Your secret link is ready
+                    </h2>
+                    
+                    <div className="bg-white rounded-xl p-4 border border-green-200 shadow-sm">
+                      <p className="text-sm text-gray-600 mb-2">Share this link:</p>
+                      <p className="font-mono text-blue-600 text-wrap break-all bg-blue-50 p-3 rounded-lg border border-blue-200">
+                        {process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/{hash}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Link
+                        ref={previewLinkRef}
+                        href={`/${hash}`}
+                        className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl py-3 px-6 font-semibold text-center hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                        onMouseEnter={() => handleMouseEnter(previewLinkRef.current)}
+                        onMouseLeave={() => handleMouseLeave(previewLinkRef.current)}
+                      >
+                        Preview Secret 👁️
+                      </Link>
+                      
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/${hash}`);
+                          toast({ title: "Copied!", description: "Link copied to clipboard" });
+                        }}
+                        className="sm:w-auto w-full bg-white border-2 border-gray-300 text-gray-700 rounded-xl py-3 px-6 font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                      >
+                        Copy 📋
+                      </button>
+                    </div>
+                  </div>
+                </div>
+            )}
+          </form>
+        </div>
+      </div>
   );
 }
